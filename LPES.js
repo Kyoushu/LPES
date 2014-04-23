@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name       LPES
 // @namespace  https://github.com/Kyoushu/LPES
-// @version    0.3
+// @version    0.4
 // @description Liquid Planner Enhancement Suite
 // @match      https://app.liquidplanner.com/*
 // @copyright  2013, James Willans
@@ -28,27 +28,39 @@
                     console.log('LPES: Updating project table');
 
                     stopObserver();
+                    
+                    var defaultCss = {
+                        'background': '#FFFFFF',
+                        'font-weight': 'normal',
+                        'color': '#000000'
+                    };
 
                     var cssGenerators = {
                         'td.custom_field_8302': function(value) {
                             if (value === 'Pending')
-                                return {'background': 'rgb(100, 100, 255)'}
+                                return $.extend(defaultCss, {'background': 'rgb(100, 100, 255)'});
                             if (value === 'Incorrect')
-                                return {'background': 'rgb(200, 0, 0)', 'font-weight': 'bold'}
-                            if (value === 'Question')
-                                return {'background': 'rgb(255, 100, 255)'}
+                                return $.extend(defaultCss, {'background': 'rgb(200, 0, 0)', 'font-weight': 'bold'});
+                            if (value === 'Question' || value === 'Comment')
+                                return $.extend(defaultCss, {'background': 'rgb(255, 100, 255)'});
                             if (value === 'Fixed')
-                                return {'background': 'rgb(0, 200, 0)'}
+                                return $.extend(defaultCss, {'background': 'rgb(0, 200, 0)'});
                             if (value === 'WTGL')
-                                return {'background': 'rgb(0, 200, 0)'}
+                                return $.extend(defaultCss, {'background': 'rgb(0, 200, 0)'});
+                            else
+                                return defaultCss;
+                            
                         },
                         'td.custom_field_1774': function(value) {
                             if (value.match(/Critical/))
-                                return {'background': 'rgb(200, 0, 0)'}
+                                return $.extend(defaultCss, {'background': 'rgb(200, 0, 0)'});
                             if (value === 'High')
-                                return {'background': 'rgb(200, 80, 80)'}
+                                return $.extend(defaultCss, {'background': 'rgb(200, 80, 80)'});
                             if (value === 'Medium')
-                                return {'background': 'rgb(200, 150, 150)'}
+                                return $.extend(defaultCss, {'background': 'rgb(200, 150, 150)'});
+                            else
+                                return defaultCss;
+                            
                         }
                     };
 
@@ -68,12 +80,10 @@
             }
 
             function startObserver() {
-                //console.log('LPES: Starting mutation observer');
                 _observer.observe(projectsContainer[0], _observerConfig);
             }
 
             function stopObserver() {
-                //console.log('LPES: Stopping mutation observer');
                 _observer.disconnect();
             }
 

@@ -35,15 +35,15 @@
 
                     var cssGenerators = {
                         'td.custom_field_8302': function(value) {
-                            if (value === 'Pending')
-                                return $.extend({}, defaultCss, {'background': 'rgb(100, 100, 255)'});
-                            if (value === 'Incorrect')
-                                return $.extend({}, defaultCss, {'background': 'rgb(200, 0, 0)', 'font-weight': 'bold'});
-                            if (value === 'Question' || value === 'Comment')
+							if (value === 'Scheduled')
+                                return $.extend({}, defaultCss, {'background': 'rgb(253,153,102)'});
+                            if (value == 'In progress')
+                                return $.extend({}, defaultCss, {'background': 'rgb(170,170,255)'});
+                            if (value === 'Delivered for testing' || value === 'Awaiting feedback')
                                 return $.extend({}, defaultCss, {'background': 'rgb(255, 100, 255)'});
-                            if (value === 'Fixed')
-                                return $.extend({}, defaultCss, {'background': 'rgb(0, 200, 0)'});
-                            if (value === 'WTGL')
+                            if (value === 'Approved to go live')
+                                return $.extend({}, defaultCss, {'background': 'rgb(198,224,198)'});
+                            if (value === 'Complete')
                                 return $.extend({}, defaultCss, {'background': 'rgb(0, 200, 0)'});
                             else
                                 return defaultCss;
@@ -51,7 +51,7 @@
                         },
                         'td.custom_field_1774': function(value) {
                             if (value.match(/Critical/))
-                                return $.extend({}, defaultCss, {'background': 'rgb(200, 0, 0)'});
+                                return $.extend({}, defaultCss, {'background': 'rgb(200, 0, 0)', 'font-weight': 'bold'});
                             if (value === 'High')
                                 return $.extend({}, defaultCss, {'background': 'rgb(200, 80, 80)'});
                             if (value === 'Medium')
